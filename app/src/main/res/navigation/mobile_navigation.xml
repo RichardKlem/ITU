@@ -12,14 +12,19 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="itu.proj.wilo.ui.account.GalleryFragment"
+        android:id="@+id/nav_account"
+        android:name="itu.proj.wilo.ui.account.AccountFragment"
         android:label="@string/menu_account"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_account" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="itu.proj.wilo.ui.my_reservations.SlideshowFragment"
-        android:label="@string/menu_my_reservations"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_settings"
+        android:name="itu.proj.wilo.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/nav_reservations"
+        android:name="itu.proj.wilo.ui.reservations.ReservationsFragment"
+        android:label="@string/menu_reservations"
+        tools:layout="@layout/fragment_reservations" />
 </navigation>

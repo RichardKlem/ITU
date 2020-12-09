@@ -7,7 +7,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.itu"
+        applicationId "itu.proj.wilo"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -51,6 +51,7 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.android.volley:volley:1.1.1'
+    implementation 'androidx.annotation:annotation:1.1.0'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

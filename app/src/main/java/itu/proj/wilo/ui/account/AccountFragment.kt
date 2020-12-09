@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.itu.databinding.FragmentAccountBinding
+import itu.proj.wilo.databinding.FragmentAccountBinding
 
 class AccountFragment : Fragment() {
 

@@ -14,44 +14,22 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.RequestFuture
 import com.android.volley.toolbox.Volley
-import com.example.itu.R
-import com.example.itu.databinding.FragmentHomeBinding
+import itu.proj.wilo.R
+import itu.proj.wilo.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.concurrent.ExecutionException
 
-
-/*class MyCustomListener() : View.OnClickListener {
-
-    override fun onClick(v: View) {
-
-        // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(v.context)
-        val url = "https://pastebin.com/raw/2bW31yqa"
-
-        val future = RequestFuture.newFuture<JSONObject>()
-        val request = JsonObjectRequest(Request.Method.GET, url, null, future, future)
-        queue.add(request)
-        var response = JSONObject()
-        try {
-            response = future.get()// this will block
-        } catch (e: InterruptedException) {
-            // exception handling
-        } catch (e: ExecutionException) {
-            // exception handling
-        }
-
-        Snackbar.make(v, response.toString(), Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show()
-    }
-}*/
-
+class ResponseResult {
+    var data = ""
+}
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
+    val result = ResponseResult()
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -72,52 +50,44 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
         val btn: Button = root.findViewById(R.id.button_search2)
-        val url = "http://xklemr00.pythonanywhere.com/getHotelsAdmin"
-        //val listener = MyCustomListener()
-        //btn.setOnClickListener(listener)
-        btn.setOnClickListener(View.OnClickListener { // Empty the TextView
-            textView.text = ""
+        val url = "http://xklemr00.pythonanywhere.com/login"
 
+
+        btn.setOnClickListener {
+            textView.text = ""
             // Initialize a new RequestQueue instance
             val requestQueue = Volley.newRequestQueue(root.context)
+            val postData = JSONObject()
+            postData.put("email", "admin@iis-hotel.cz")
+            postData.put("password", "1234")
 
             // Initialize a new JsonArrayRequest instance
-            val jsonArrayRequest = JsonArrayRequest(
-                Request.Method.GET,
+            val jsonObjectRequest = JsonObjectRequest(
+                Request.Method.POST,
                 url,
-                null,
-                { response ->
-                    // Do something with response
-                    //mTextView.setText(response.toString());
-
-                    // Process the JSON
-                    try {
-                        // Loop through the array elements
-                        for (i in 0 until response.length()) {
-                            // Get current json object
-                            val obj = JSONObject(response.getJSONObject(i).toString()).toString(4)
-                            /*val address = obj.getString("address")
-                            val category = obj.getString("category")
-                            val description = obj.getString("description")
-                            val email = obj.getString("email")*/
-
-                            textView.text = obj.toString()
-                        }
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                }
-            ) { // Do something when error occurred
-                errmsg ->
-                textView.text = "$errmsg"
-            }
+                postData,
+                onResponse(result)
+            ) { errmsg -> textView.text = "$errmsg" }
 
             // Add JsonArrayRequest to the RequestQueue
-            requestQueue.add(jsonArrayRequest)
-        })
+            requestQueue.add(jsonObjectRequest)
+            textView.text = "this.result.data"
+        }
 
         return root
     }
+
+    private fun onResponse(result: ResponseResult): (response: JSONObject) -> Unit {
+        return { response ->
+            try {
+                val obj = JSONObject(response.toString()).toString(4)
+                this.result.data = obj.toString()
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -11,14 +11,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.Volley
-import com.example.itu.R
-import com.example.itu.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import java.net.URL
+import itu.proj.wilo.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val cookie = intent.getStringExtra("EXTRA_SESSION_ID")
         val policy = ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
@@ -38,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Cookie: $cookie", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -47,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_home, R.id.nav_account, R.id.nav_settings, R.id.nav_reservations
+                R.id.nav_home, R.id.nav_account, R.id.nav_settings, R.id.nav_reservations
         ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

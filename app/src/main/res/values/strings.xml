@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ITU</string>
+    <string name="app_name">Wilo</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Wilo</string>
@@ -26,14 +26,24 @@
     <string name="language">Language</string>
     <string name="log_out">Log out</string>
     <!-- Strings related to login -->
+    <string name="prompt_full_name">Full name</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_phone_number">Phone Number</string>
+    <string name="prompt_birth_date">Birth date</string>
+    <string name="prompt_address">Address</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="prompt_reenter_password">Re-enter password</string>
+    <string name="terms_and_conditions">By clicking Register you are agreeing to the Terms and Conditions.</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
     <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >3 characters</string>
+    <string name="invalid_email">Not a valid email.</string>
+    <string name="invalid_name">"Not a valid name, valid name is at least 2 words of at least 2 characters.</string>
+    <string name="invalid_password">Password must be > 3 characters.</string>
+    <string name="invalid_password_reenter">Passwords do not match.</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="log_in_or_register">Log-in or register.</string>
+    <string name="user_account_information">User Account Information</string>
 
 </resources>

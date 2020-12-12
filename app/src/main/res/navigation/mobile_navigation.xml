@@ -28,8 +28,18 @@
         android:label="@string/menu_reservations"
         tools:layout="@layout/fragment_reservations" />
     <activity
-        android:id="@+id/loginActivity"
-        android:name="itu.proj.wilo.ui.login.LoginActivity"
-        android:label="activity_login"
-        tools:layout="@layout/activity_login" />
+        android:id="@+id/myLoginActivity2"
+        android:name="itu.proj.wilo.MyLoginActivity"
+        android:label="activity_my_login"
+        tools:layout="@layout/activity_my_login" />
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="itu.proj.wilo.RegisterActivity"
+        android:label="activity_register"
+        tools:layout="@layout/activity_register" />
+    <fragment
+        android:id="@+id/hotel"
+        android:name="itu.proj.wilo.ui.hotel.`HotelFragment.kt`"
+        android:label="hotel_fragment"
+        tools:layout="@layout/activity_hotel" />
 </navigation>

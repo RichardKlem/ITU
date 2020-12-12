@@ -4,28 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itu.proj.wilo.ui.account.AccountFragment">
+    tools:context="itu.proj.wilo.HotelActivity"
+    android:background="@color/light_blue_wilo">
 
+    <ImageView
+        android:id="@+id/image_wilo_logo"
+        android:layout_width="117dp"
+        android:layout_height="114dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_wilo" />
 
     <TextView
-        android:id="@+id/account_header"
-        android:layout_width="match_parent"
+        android:id="@+id/text_header"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/user_account_information"
-        android:textSize="20sp"
+        android:text="Pokoj s nazvem..."
+        android:textSize="22dp"
         android:textStyle="bold"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_wilo_logo" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:src="@drawable/hotel_1_room_1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.072"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_header"
+        app:layout_constraintVertical_bias="0.021" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Popis pokoje"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.052" />
 
     <TableLayout
         android:id="@+id/account_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
         app:layout_constraintVertical_bias="0.19"
         android:stretchColumns="1*">
 
@@ -37,8 +70,8 @@
             tools:layout_editor_absoluteY="255dp">
 
             <TextView
-                android:id="@+id/row_name"
-                android:text="Name"
+                android:id="@+id/row_price_per_night"
+                android:text="Cena za noc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -46,7 +79,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_name"
+                android:id="@+id/text_price_per_night"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -58,19 +91,21 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/row_email"
-                android:text="Email"
+                android:id="@+id/row_persons_sum"
+                android:text="Počet osob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/text_email"
+            <EditText
+                android:id="@+id/text_persons_sum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:inputType="number"
+                android:autofillHints="Počet ubytovaných osob"
                 android:textSize="20sp" />
         </TableRow>
 
@@ -79,20 +114,25 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/row_address"
-                android:text="Address"
+                android:id="@+id/row_date_start"
+                android:text="Začátek pobytu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/text_address"
+            <EditText
+                android:id="@+id/text_date_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:ems="10"
                 android:layout_marginStart="20dp"
-                android:textSize="20sp" />
+                android:inputType="date"
+                android:autofillHints="Datum Vašeho příjezdu" />
+
+
 
         </TableRow>
 
@@ -101,20 +141,23 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/row_birthdate"
-                android:text="Birthdate"
+                android:id="@+id/row_date_end"
+                android:text="Konec pobytu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/text_birthdate"
+            <EditText
+                android:id="@+id/text_date_end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:ems="10"
                 android:layout_marginStart="20dp"
-                android:textSize="20sp" />
+                android:inputType="date"
+                android:autofillHints="Datum Vašeho odjezdu" />
         </TableRow>
 
         <TableRow
@@ -122,8 +165,8 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/row_phone_number"
-                android:text="Phone number"
+                android:id="@+id/row_days_sum"
+                android:text="Celkem dní"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -131,7 +174,27 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_phone_number"
+                android:id="@+id/text_days_sum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="20sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/row_price_sum"
+                android:text="Cena celkem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_price_sum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -141,32 +204,16 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/logout_button"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/log_out"
-        android:visibility="visible"
+        android:layout_marginTop="24dp"
+        android:text="Rezervovat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/account_table"
-        app:layout_constraintVertical_bias="0.876" />
-
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="93dp"
-        android:layout_height="95dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_header"
-        app:layout_constraintVertical_bias="0.094"
-        tools:src="@tools:sample/avatars" />
-
+        app:layout_constraintTop_toBottomOf="@+id/account_table"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

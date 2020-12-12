@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="itu.proj.wilo.ui.home.HomeFragment"
+    tools:context="itu.proj.wilo.HotelActivity"
     android:background="@color/light_blue_wilo">
 
     <ImageView
@@ -22,26 +22,13 @@
         android:id="@+id/text_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Výběr hotelů Wilo"
         android:textSize="22dp"
         android:textStyle="bold"
+        android:text="Nabízené pokoje"
         app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_wilo_logo" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:max="10"
-        android:progress="3"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_header" />
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -52,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_header"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997">
+        app:layout_constraintVertical_bias="0.5">
 
         <LinearLayout
             android:id="@+id/linearView"
@@ -65,55 +52,39 @@
                 android:id="@+id/cardView1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="15dp"
                 app:cardElevation="15dp"
+                app:cardCornerRadius="15dp"
                 app:cardUseCompatPadding="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="match_parent"
                     android:background="@color/light_blue_wilo">
 
                     <ImageView
-                        android:id="@+id/image_hotel_1"
+                        android:id="@+id/image_room_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:padding="5dp"
-                        android:src="@drawable/hotel_1"
+                        android:src="@drawable/hotel_1_room_1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                    <RatingBar
-                        android:id="@+id/ratingBar1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/image_hotel_1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toTopOf="@+id/text_hotel_1"
-                        android:rating="5"
-                        android:isIndicator="true"
-                        android:progressTint="@color/gold"
-                        android:progressBackgroundTint="@color/gray_600"
-                        style="?android:attr/ratingBarStyleSmall"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:layout_editor_absoluteX="0dp"
+                        android:clickable="true"
+                        android:focusable="true" />
 
                     <TextView
-                        android:id="@+id/text_hotel_1"
+                        android:id="@+id/text_room_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:text="Wilo Crowne Plaza"
+                        android:text="Standardní pokoj"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_hotel_1" />
+                        app:layout_constraintTop_toBottomOf="@+id/image_room_1" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -123,54 +94,39 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="15dp"
                 app:cardElevation="15dp"
+                app:cardCornerRadius="15dp"
                 app:cardUseCompatPadding="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="match_parent"
                     android:background="@color/light_blue_wilo">
 
                     <ImageView
-                        android:id="@+id/image_hotel_2"
+                        android:id="@+id/image_room_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:padding="5dp"
-                        android:src="@drawable/hotel_2"
+                        android:src="@drawable/hotel_1_room_2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0"
-                        tools:layout_editor_absoluteX="0dp" />
-                    <RatingBar
-                        android:id="@+id/ratingBar2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/image_hotel_2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toTopOf="@+id/text_hotel_2"
-                        android:rating="4"
-                        android:isIndicator="true"
-                        android:progressTint="@color/gold"
-                        android:progressBackgroundTint="@color/gray_600"
-                        style="?android:attr/ratingBarStyleSmall"
-                        app:layout_constraintVertical_bias="0.0" />
+                        tools:layout_editor_absoluteX="0dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
                     <TextView
-                        android:id="@+id/text_hotel_2"
+                        android:id="@+id/text_room_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:text="Wilo Sunset Lodge"
+                        android:text="Pokoj se dvěmi ložnicemi"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_hotel_2" />
+                        app:layout_constraintTop_toBottomOf="@+id/image_room_2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -178,55 +134,39 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="15dp"
                 app:cardElevation="15dp"
+                app:cardCornerRadius="15dp"
                 app:cardUseCompatPadding="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="match_parent"
                     android:background="@color/light_blue_wilo">
 
                     <ImageView
-                        android:id="@+id/image_hotel_3"
+                        android:id="@+id/image_room_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:padding="5dp"
-                        android:src="@drawable/hotel_3"
+                        android:src="@drawable/hotel_1_room_3"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0"
-                        tools:layout_editor_absoluteX="0dp" />
-                    <RatingBar
-                        android:id="@+id/ratingBar3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/image_hotel_3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toTopOf="@+id/text_hotel_3"
-                        android:rating="3"
-                        android:isIndicator="true"
-                        android:progressTint="@color/gold"
-                        android:progressBackgroundTint="@color/gray_600"
-                        style="?android:attr/ratingBarStyleSmall"
-                        app:layout_constraintVertical_bias="0.0" />
+                        tools:layout_editor_absoluteX="0dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
                     <TextView
-                        android:id="@+id/text_hotel_3"
+                        android:id="@+id/text_room_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:text="Wilo Knights Inn"
+                        android:text="Deluxe pokoj"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_hotel_3" />
+                        app:layout_constraintTop_toBottomOf="@+id/image_room_3" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>

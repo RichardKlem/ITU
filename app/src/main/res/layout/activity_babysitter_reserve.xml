@@ -81,7 +81,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_price_per_night"
+                android:id="@+id/text_price_per_hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

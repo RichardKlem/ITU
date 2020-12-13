@@ -23,12 +23,9 @@ class LoginActivity : AppCompatActivity() {
     lateinit var loginViewModel: LoginViewModel
     lateinit var binding: ActivityLoginBinding
     lateinit var loading: ProgressBar
-    private lateinit var cookie: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(binding.root)
         setContentView(R.layout.activity_login)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -70,7 +67,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            val url = "http://xklemr00.pythonanywhere.com/login"
+            loginButton.isClickable = false
+            val url = "https://xklemr00.pythonanywhere.com/login"
             // Initialize a new RequestQueue instance
             val requestQueue = Volley.newRequestQueue(binding.root.context)
 

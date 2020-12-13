@@ -3,18 +3,37 @@ package itu.proj.wilo
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import itu.proj.wilo.databinding.ActivityRoomBinding
 import itu.proj.wilo.ui.hotel.RoomViewModel
+import org.json.JSONException
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
+
+private fun onResponse(activity: RoomActivity): (response: JSONObject) -> Unit {
+    return { response ->
+        try {
+            activity.callbackRequestResponse(response)
+        }
+        catch (e: JSONException) {
+            Toast.makeText(activity, e.toString(), Toast.LENGTH_LONG).show()
+        }
+    }
+}
 
 class RoomActivity : AppCompatActivity() {
     lateinit var roomViewModel: RoomViewModel
@@ -28,6 +47,7 @@ class RoomActivity : AppCompatActivity() {
     lateinit var endDate: EditText
     lateinit var daysSum: TextView
     private lateinit var myCalendar: Calendar
+    private var price: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +64,8 @@ class RoomActivity : AppCompatActivity() {
 
         myCalendar = Calendar.getInstance()
 
+        price = 1000
+        binding.textPricePerNight.text = price.toString()
         personNum = binding.textPersonsSum
         personNum.setText("2")
         startDate = binding.textDateStart
@@ -51,6 +73,30 @@ class RoomActivity : AppCompatActivity() {
         daysSum = binding.textDaysSum
         daysSum.text = "0"
         val reserveButton = binding.button
+
+        reserveButton.setOnClickListener {
+
+            reserveButton.isClickable = false
+            val url = "http://xklemr00.pythonanywhere.com/bookRoom"
+            val requestQueue = Volley.newRequestQueue(this)
+            val postData = JSONObject()
+            postData.put("CookieUserID", cookie)
+            postData.put("adult_count", personNum.text.toString())
+            postData.put("approved", "1")
+            postData.put("start_date", startDate.text.toString())
+            postData.put("end_date", endDate.text.toString())
+            postData.put("id_room", 1)
+            postData.put("room_count", 2)
+
+            val jsonArrayRequest = JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                postData,
+                onResponse(this)
+            ) { throw Exception("User account information retrieving failed.") }
+            requestQueue.add(jsonArrayRequest)
+        }
+
 
         val sDate =
             OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
@@ -107,19 +153,9 @@ class RoomActivity : AppCompatActivity() {
             }
         }
 
-        /*val yourDate = Calendar.getInstance().timeInMillis
-        val millionSeconds = yourDate - TimeUnit.toMillis(2)
-        val out = TimeUnit.MILLISECONDS.toDays(millionSeconds).toString()
-        val myFormat = "YYYY-MM-DD"
-        val formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy h:mm:ss a")
-        val dateTime = LocalDateTime.parse(date, formatter)
-        val formatter2 = DateTimeFormatter.ofPattern("dd MMM yyyy")
-        println(dateTime.format(formatter2))*/
-
-        val price = 1000
         val priceText = "$price Kč"
         binding.textPricePerNight.text = priceText
-        val priceSumText = "${price * daysSum.text.toString().toInt()} Kč"
+        val priceSumText = "${price.toString().toInt() * daysSum.text.toString().toInt() * personNum.text.toString().toInt()} Kč"
         binding.textPriceSum.text = priceSumText
     }
     private fun updateLabel(date: EditText) {
@@ -135,14 +171,13 @@ class RoomActivity : AppCompatActivity() {
         val endDateDB: Date? = sdf.parse(endDateString)
         val diff: Long = endDateDB!!.time - startDateDB!!.time
         val days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
-        //(startDateDB.time < today) ||
         if ((today.after(startDateDB)) || (days < 1)) {
             return false
         }
         startDate.error = null
         endDate.error = null
         daysSum.text = days.toString()
-        val finalPrice = "${binding.textPricePerNight.text.toString().toInt() * days} Kč"
+        val finalPrice = "${price * days * personNum.text.toString().toInt()} Kč"
         binding.textPriceSum.text = finalPrice
         return true
     }
@@ -152,4 +187,23 @@ class RoomActivity : AppCompatActivity() {
         }
         return true
     }
+
+    fun callbackRequestResponse(response: JSONObject) {
+        Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
+    }
+    /**
+     * Extension function to simplify setting an afterTextChanged action to EditText components.
+     */
+    private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+        this.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                afterTextChanged.invoke(editable.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
+    }
 }
+

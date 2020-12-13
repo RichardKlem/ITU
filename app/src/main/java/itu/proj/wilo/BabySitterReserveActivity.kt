@@ -106,7 +106,7 @@ class BabySitterReserveActivity : AppCompatActivity() {
 
         val price = 1000
         val priceText = "$price Kč"
-        binding.textPricePerNight.text = priceText
+        binding.textPricePerHour.text = priceText
         val priceSumText = "${price * hoursSum.text.toString().toInt()} Kč"
         binding.textPriceSum.text = priceSumText
     }
@@ -122,15 +122,15 @@ class BabySitterReserveActivity : AppCompatActivity() {
         val startDateDB: Date? = sdf.parse(startDateString)
         val endDateDB: Date? = sdf.parse(endDateString)
         val diff: Long = endDateDB!!.time - startDateDB!!.time
-        val days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
+        val hours = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS).toInt()
         //(startDateDB.time < today) ||
-        if ((today.after(startDateDB)) || (days < 1)) {
+        if ((today.after(startDateDB)) || (hours > 12)) {
             return false
         }
         startDate.error = null
         endDate.error = null
-        hoursSum.text = days.toString()
-        val finalPrice = "${binding.textPricePerNight.text.toString().toInt() * days} Kč"
+        hoursSum.text = hours.toString()
+        val finalPrice = "${binding.textPricePerHour.text.toString().toInt() * hours} Kč"
         binding.textPriceSum.text = finalPrice
         return true
     }

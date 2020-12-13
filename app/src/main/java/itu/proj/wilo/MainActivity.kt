@@ -15,31 +15,11 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import itu.proj.wilo.databinding.ActivityMainBinding
 
-//NavigationView.OnNavigationItemSelectedListener
 class MainActivity : AppCompatActivity() {
 
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var binding: ActivityMainBinding
     lateinit var globalCookie : String
-
-    /*override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        when (item.itemId) {
-            R.id.nav_logout -> {
-                val switchActivityIntent = Intent(this, MyLoginActivity::class.java)
-                startActivity(switchActivityIntent)
-            }
-        }
-        val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        drawer.closeDrawer(GravityCompat.START)
-        return true
-    }
-
-    private fun setNavigationViewListener() {
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(this)
-    }*/
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val cookie = intent.getStringExtra("EXTRA_SESSION_ID")

@@ -102,9 +102,10 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         registerButton.setOnClickListener {
+            registerButton.isClickable = false
             val requestQueue = Volley.newRequestQueue(binding.root.context)
 
-            val url = "http://xklemr00.pythonanywhere.com/registration"
+            val url = "https://xklemr00.pythonanywhere.com/registration"
             val postData = JSONObject()
             postData.put("name", fullName.text.toString())
             if (birthDate.text.toString() != ""){

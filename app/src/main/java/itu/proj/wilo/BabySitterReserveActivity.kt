@@ -8,25 +8,22 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import itu.proj.wilo.databinding.ActivityRoomBinding
-import itu.proj.wilo.ui.hotel.RoomViewModel
+import itu.proj.wilo.databinding.ActivityBabysitterReserveBinding
+import itu.proj.wilo.ui.hotel.BabySitterReserveViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 
-class RoomActivity : AppCompatActivity() {
-    lateinit var roomViewModel: RoomViewModel
-    lateinit var binding: ActivityRoomBinding
+class BabySitterReserveActivity : AppCompatActivity() {
+    lateinit var babySitterReserveViewModel: BabySitterReserveViewModel
+    lateinit var binding: ActivityBabysitterReserveBinding
     lateinit var loading: ProgressBar
-    private var hotelId: Int = -1
     private var cookie: String? = null
-    private var hotelName: String? = null
-    lateinit var personNum: EditText
     lateinit var startDate: EditText
     lateinit var endDate: EditText
-    lateinit var daysSum: TextView
+    lateinit var hoursSum: TextView
     private lateinit var myCalendar: Calendar
 
 
@@ -34,22 +31,18 @@ class RoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         cookie = intent.getStringExtra("EXTRA_SESSION_ID")
-        hotelId = intent.getIntExtra("EXTRA_HOTEL_ID", -1)
-        hotelName = intent.getStringExtra("EXTRA_HOTEL_NAME")
 
-        setContentView(R.layout.activity_room)
-        roomViewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
-        binding = ActivityRoomBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_babysitter_reserve)
+        babySitterReserveViewModel = ViewModelProvider(this).get(BabySitterReserveViewModel::class.java)
+        binding = ActivityBabysitterReserveBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         myCalendar = Calendar.getInstance()
 
-        personNum = binding.textPersonsSum
-        personNum.setText("2")
         startDate = binding.textDateStart
         endDate = binding.textDateEnd
-        daysSum = binding.textDaysSum
-        daysSum.text = "0"
+        hoursSum = binding.textHoursSum
+        hoursSum.text = "0"
         val reserveButton = binding.button
 
         val sDate =
@@ -69,22 +62,17 @@ class RoomActivity : AppCompatActivity() {
 
         startDate.setOnClickListener { // TODO Auto-generated method stub
             DatePickerDialog(
-                this@RoomActivity, sDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
+                this@BabySitterReserveActivity, sDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             ).show()
         }
         endDate.setOnClickListener { // TODO Auto-generated method stub
             DatePickerDialog(
-                this@RoomActivity, eDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
+                this@BabySitterReserveActivity, eDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             ).show()
         }
 
-        personNum.afterTextChanged {
-            if (!isPersonValid(personNum)) {
-                personNum.error = "Chybný počet osob"
-            }
-        }
 
         startDate.afterTextChanged {
             if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
@@ -119,7 +107,7 @@ class RoomActivity : AppCompatActivity() {
         val price = 1000
         val priceText = "$price Kč"
         binding.textPricePerNight.text = priceText
-        val priceSumText = "${price * daysSum.text.toString().toInt()} Kč"
+        val priceSumText = "${price * hoursSum.text.toString().toInt()} Kč"
         binding.textPriceSum.text = priceSumText
     }
     private fun updateLabel(date: EditText) {
@@ -141,15 +129,9 @@ class RoomActivity : AppCompatActivity() {
         }
         startDate.error = null
         endDate.error = null
-        daysSum.text = days.toString()
+        hoursSum.text = days.toString()
         val finalPrice = "${binding.textPricePerNight.text.toString().toInt() * days} Kč"
         binding.textPriceSum.text = finalPrice
-        return true
-    }
-    private fun isPersonValid(num: EditText) : Boolean{
-        if (num.text.toString().toInt() < 1) {
-            return false
-        }
         return true
     }
 }

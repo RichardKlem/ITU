@@ -140,7 +140,7 @@ class RegisterActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, statusMessage, Toast.LENGTH_LONG).show()
 
         if (statusCode == 200) {
-            val switchActivityIntent = Intent(this, MyLoginActivity::class.java)
+            val switchActivityIntent = Intent(this, LoginActivity::class.java)
             startActivity(switchActivityIntent)
         }
         loading.visibility = View.GONE

@@ -1,14 +1,10 @@
 package itu.proj.wilo
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -72,8 +68,8 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_home, R.id.nav_account, R.id.nav_settings, R.id.nav_reservations,
-                R.id.nav_logout
+                R.id.nav_home, R.id.nav_account, R.id.nav_settings, R.id.nav_reservations,R.id.nav_home,
+                R.id.nav_babysitting_search
         ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

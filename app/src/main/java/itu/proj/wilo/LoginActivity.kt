@@ -14,14 +14,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import itu.proj.wilo.databinding.ActivityMyLoginBinding
-import itu.proj.wilo.ui.mylogin.MyLoginViewModel
+import itu.proj.wilo.databinding.ActivityLoginBinding
+import itu.proj.wilo.ui.login.LoginViewModel
 import org.json.JSONException
 import org.json.JSONObject
 
-class MyLoginActivity : AppCompatActivity() {
-    lateinit var myLoginViewModel: MyLoginViewModel
-    lateinit var binding: ActivityMyLoginBinding
+class LoginActivity : AppCompatActivity() {
+    lateinit var loginViewModel: LoginViewModel
+    lateinit var binding: ActivityLoginBinding
     lateinit var loading: ProgressBar
     private lateinit var cookie: String
 
@@ -29,9 +29,9 @@ class MyLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(binding.root)
-        setContentView(R.layout.activity_my_login)
-        myLoginViewModel = ViewModelProvider(this).get(MyLoginViewModel::class.java)
-        binding = ActivityMyLoginBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_login)
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val email = binding.email
@@ -40,7 +40,7 @@ class MyLoginActivity : AppCompatActivity() {
         loading = binding.loading
         val registerButton = binding.registerButton
 
-        myLoginViewModel.loginFormState.observe(this@MyLoginActivity, Observer {
+        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
@@ -55,14 +55,14 @@ class MyLoginActivity : AppCompatActivity() {
         })
 
         email.afterTextChanged {
-            myLoginViewModel.loginDataChanged(
+            loginViewModel.loginDataChanged(
                 email.text.toString(),
                 password.text.toString()
             )
         }
         password.apply {
             afterTextChanged {
-                myLoginViewModel.loginDataChanged(
+                loginViewModel.loginDataChanged(
                     email.text.toString(),
                     password.text.toString()
                 )
@@ -122,7 +122,7 @@ class MyLoginActivity : AppCompatActivity() {
     }
 }
 
-private fun onResponse(activity: MyLoginActivity): (response: JSONObject) -> Unit {
+private fun onResponse(activity: LoginActivity): (response: JSONObject) -> Unit {
     return { response ->
         try {
             activity.callbackRequestResponse(response)
@@ -138,7 +138,10 @@ private fun onResponse(activity: MyLoginActivity): (response: JSONObject) -> Uni
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
+            try {
+                afterTextChanged.invoke(editable.toString())
+            }
+            catch (e: Exception){}
         }
 
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}

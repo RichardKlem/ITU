@@ -29,17 +29,32 @@
         tools:layout="@layout/fragment_reservations" />
     <activity
         android:id="@+id/myLoginActivity2"
-        android:name="itu.proj.wilo.MyLoginActivity"
+        android:name="itu.proj.wilo.LoginActivity"
         android:label="activity_my_login"
-        tools:layout="@layout/activity_my_login" />
+        tools:layout="@layout/activity_login" />
     <activity
         android:id="@+id/registerActivity"
         android:name="itu.proj.wilo.RegisterActivity"
         android:label="activity_register"
         tools:layout="@layout/activity_register" />
-    <fragment
+    <activity
         android:id="@+id/hotel"
-        android:name="itu.proj.wilo.ui.hotel.`HotelFragment.kt`"
+        android:name="itu.proj.wilo.HotelActivity"
         android:label="hotel_fragment"
         tools:layout="@layout/activity_hotel" />
+    <fragment
+        android:id="@+id/nav_babysitting_search"
+        android:name="itu.proj.wilo.ui.babysitter.BabysittingFragment"
+        android:label="Babysitting"
+        tools:layout="@layout/fragment_babysitting" />
+    <activity
+        android:id="@+id/babySitterReserveActivity2"
+        android:name="itu.proj.wilo.BabySitterReserveActivity"
+        android:label="BabySitterReserveActivity"
+        tools:layout="@layout/activity_babysitter_reserve"/>
+    <activity
+        android:id="@+id/roomActivity4"
+        android:name="itu.proj.wilo.RoomActivity"
+        android:label="RoomActivity"
+        tools:layout="@layout/activity_room"/>
 </navigation>

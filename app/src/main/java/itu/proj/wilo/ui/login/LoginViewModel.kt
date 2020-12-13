@@ -1,17 +1,13 @@
-package itu.proj.wilo.ui.mylogin
+package itu.proj.wilo.ui.login
 
 
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Patterns
-import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import itu.proj.wilo.R
-import itu.proj.wilo.ui.login.LoginFormState
 
-class MyLoginViewModel : ViewModel() {
+class LoginViewModel : ViewModel() {
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 

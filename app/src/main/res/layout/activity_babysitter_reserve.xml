@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="itu.proj.wilo.HotelActivity"
-    android:background="@color/light_blue_wilo">
+    android:background="@color/pink_wilo">
 
     <ImageView
         android:id="@+id/image_wilo_logo"
@@ -16,15 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_wilo_light_blue"
+        app:srcCompat="@drawable/ic_wilo_pink"
         android:contentDescription="@string/wilo_logo"/>
 
     <TextView
         android:id="@+id/text_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pokoj s nazvem..."
-        android:textSize="22dp"
+        android:text="Teta/strejda na hlídání"
+        android:textSize="22sp"
         android:textStyle="bold"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:src="@drawable/hotel_1_room_1"
+        android:src="@drawable/babysitter_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Popis pokoje"
+        android:text="20 let, studentka"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
 
             <TextView
                 android:id="@+id/row_price_per_night"
-                android:text="Cena za noc"
+                android:text="Cena za hodinu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -93,31 +93,8 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/row_persons_sum"
-                android:text="Počet osob"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="textStart"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/text_persons_sum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:inputType="number"
-                android:autofillHints="Počet ubytovaných osob"
-                android:textSize="20sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
                 android:id="@+id/row_date_start"
-                android:text="Začátek pobytu"
+                android:text="Začátek hlídání"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -132,7 +109,7 @@
                 android:ems="10"
                 android:layout_marginStart="20dp"
                 android:inputType="date"
-                android:autofillHints="Datum Vašeho příjezdu"
+                android:autofillHints="Začátek hlídání"
                 android:clickable="true"
                 android:focusable="false"
                 android:editable="false"/>
@@ -146,7 +123,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/row_date_end"
-                android:text="Konec pobytu"
+                android:text="Konec hlídání"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -159,7 +136,7 @@
                 android:textSize="20sp"
                 android:ems="10"
                 android:layout_marginStart="20dp"
-                android:autofillHints="Datum Vašeho odjezdu"
+                android:autofillHints="Konec hlídání"
                 android:clickable="true"
                 android:focusable="false"
                 android:editable="false"
@@ -171,8 +148,8 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/row_days_sum"
-                android:text="Celkem nocí"
+                android:id="@+id/row_hours_sum"
+                android:text="Celkem hodin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -180,7 +157,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_days_sum"
+                android:id="@+id/text_hours_sum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -214,7 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Rezervovat"
+        android:text="Objednat hlídání"
         android:enabled="false"
         android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"

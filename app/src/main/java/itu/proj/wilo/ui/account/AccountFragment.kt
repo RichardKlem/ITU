@@ -14,7 +14,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import itu.proj.wilo.MainActivity
-import itu.proj.wilo.MyLoginActivity
+import itu.proj.wilo.LoginActivity
 import itu.proj.wilo.R
 import itu.proj.wilo.databinding.FragmentAccountBinding
 import org.json.JSONException
@@ -60,7 +60,7 @@ class AccountFragment : Fragment() {
         val mainActivity:  MainActivity = activity as MainActivity
 
         binding.logoutButton.setOnClickListener {
-            val switchActivityIntent = Intent(activity, MyLoginActivity::class.java)
+            val switchActivityIntent = Intent(activity, LoginActivity::class.java)
             startActivity(switchActivityIntent)
         }
 

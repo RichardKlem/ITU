@@ -45,5 +45,9 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="log_in_or_register">Log-in or register.</string>
     <string name="user_account_information">User Account Information</string>
+    <string name="wilo_logo">Wilo logo</string>
+    <string name="room_picture">Room picture</string>
+    <string name="babysitter_image">Babysitter image</string>
+    <string name="babysitting">Babysitting</string>
 
 </resources>

@@ -21,16 +21,10 @@
             android:icon="@drawable/ic_settings"
             android:title="@string/menu_settings"
             />
-
-        <item android:title="" />
-        <item android:title="" />
-        <item android:title="" />
-        <item android:title="" />
         <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_log_out"
-            android:title="@string/log_out"
+            android:id="@+id/nav_babysitting_search"
+            android:icon="@drawable/babysitting"
+            android:title="@string/babysitting"
             />
-
     </group>
 </menu>

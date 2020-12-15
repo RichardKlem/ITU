@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import itu.proj.wilo.R
 
 class RegistrationViewModel : ViewModel() {
+    // Live data LoginFormState object to enable observing.
     private val _loginForm = MutableLiveData<RegistrationFormState>()
     val registrationFormState: LiveData<RegistrationFormState> = _loginForm
 
@@ -32,7 +33,7 @@ class RegistrationViewModel : ViewModel() {
             username.isNotBlank()
         }
     }
-    // Full name must be at least 5 chars with one space
+    // Full name must be at least 5 characters with at least one space.
     private fun isNameValid(name: String): Boolean {
         return name.length > 4 &&  name.contains(' ')
 

@@ -1,4 +1,4 @@
-package itu.proj.wilo.ui.hotel
+package itu.proj.wilo.ui.room
 
 import androidx.lifecycle.ViewModel
 

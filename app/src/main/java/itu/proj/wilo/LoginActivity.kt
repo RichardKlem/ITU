@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -18,6 +19,7 @@ import itu.proj.wilo.databinding.ActivityLoginBinding
 import itu.proj.wilo.ui.login.LoginViewModel
 import org.json.JSONException
 import org.json.JSONObject
+
 
 class LoginActivity : AppCompatActivity() {
     lateinit var loginViewModel: LoginViewModel
@@ -53,15 +55,15 @@ class LoginActivity : AppCompatActivity() {
 
         email.afterTextChanged {
             loginViewModel.loginDataChanged(
-                email.text.toString(),
-                password.text.toString()
+                    email.text.toString(),
+                    password.text.toString()
             )
         }
         password.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                    email.text.toString(),
-                    password.text.toString()
+                        email.text.toString(),
+                        password.text.toString()
                 )
             }
         }
@@ -77,20 +79,25 @@ class LoginActivity : AppCompatActivity() {
             postData.put("password", password.text.toString())
 
             // Initialize a new JsonArrayRequest instance
-            val jsonArrayRequest = JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                postData,
-                onResponse(this)
+            val jsonObjectRequest = JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    postData,
+                    onResponse(this)
             ) { Toast.makeText(
                     applicationContext,
                     "Login failed, try again.",
                     Toast.LENGTH_LONG
-                ).show()
+            ).show()
                 loading.visibility = View.GONE
             }
             loading.visibility = View.VISIBLE
-            requestQueue.add(jsonArrayRequest)
+            // Set no retry policy, because bug in Volley is by default doubling requests
+            jsonObjectRequest.retryPolicy = DefaultRetryPolicy(
+                    0,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+            requestQueue.add(jsonObjectRequest)
         }
         registerButton.setOnClickListener {
             val switchActivityIntent = Intent(this, RegisterActivity::class.java)
@@ -130,16 +137,14 @@ private fun onResponse(activity: LoginActivity): (response: JSONObject) -> Unit 
         }
     }
 }
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
+// Extension function to simplify setting an afterTextChanged action to EditText components.
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
             try {
                 afterTextChanged.invoke(editable.toString())
+            } catch (e: Exception) {
             }
-            catch (e: Exception){}
         }
 
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}

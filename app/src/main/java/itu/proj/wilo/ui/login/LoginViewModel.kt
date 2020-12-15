@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import itu.proj.wilo.R
 
 class LoginViewModel : ViewModel() {
+    // Live data LoginFormState object to enable observing
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
@@ -20,7 +21,6 @@ class LoginViewModel : ViewModel() {
             _loginForm.value = LoginFormState(isDataValid = true)
         }
     }
-    // A placeholder username validation check
     private fun isEmailNameValid(username: String): Boolean {
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
@@ -28,8 +28,6 @@ class LoginViewModel : ViewModel() {
             username.isNotBlank()
         }
     }
-
-    // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 3
     }

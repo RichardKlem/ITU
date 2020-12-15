@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -51,11 +52,6 @@ class AccountFragment : Fragment() {
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textName
-        accountViewModel.text.observe(viewLifecycleOwner, {
-            textView.text = it
-        })
-
         // Get parent activity
         val mainActivity:  MainActivity = activity as MainActivity
 
@@ -69,13 +65,18 @@ class AccountFragment : Fragment() {
         val postData = JSONObject()
         postData.put("CookieUserID", mainActivity.globalCookie)
 
-        val jsonArrayRequest = JsonObjectRequest(
+        val jsonObjectRequest = JsonObjectRequest(
             Request.Method.POST,
             url,
             postData,
             onResponse(this)
         ) { throw Exception("User account information retrieving failed.") }
-        requestQueue.add(jsonArrayRequest)
+        // Set no retry policy, because bug in Volley is by default doubling requests
+        jsonObjectRequest.retryPolicy = DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        requestQueue.add(jsonObjectRequest)
 
         return root
     }

@@ -1,7 +1,7 @@
 package itu.proj.wilo.ui.registration
 
 /**
- * Data validation state of the login form.
+ * Data validation state of the registration form.
  */
 data class RegistrationFormState(
     val emailError: Int? = null,

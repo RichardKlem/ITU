@@ -11,11 +11,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import itu.proj.wilo.databinding.ActivityRoomBinding
-import itu.proj.wilo.ui.hotel.RoomViewModel
+import itu.proj.wilo.ui.room.RoomViewModel
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -88,38 +89,43 @@ class RoomActivity : AppCompatActivity() {
             postData.put("id_room", 1)
             postData.put("room_count", 2)
 
-            val jsonArrayRequest = JsonObjectRequest(
+            val jsonObjectRequest = JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 postData,
                 onResponse(this)
             ) { throw Exception("User account information retrieving failed.") }
-            requestQueue.add(jsonArrayRequest)
+            // Set no retry policy, because bug in Volley is by default doubling requests
+            jsonObjectRequest.retryPolicy = DefaultRetryPolicy(
+                    0,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+            requestQueue.add(jsonObjectRequest)
         }
 
 
         val sDate =
-            OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 myCalendar[Calendar.YEAR] = year
                 myCalendar[Calendar.MONTH] = monthOfYear
                 myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
                 updateLabel(startDate)
             }
         val eDate =
-            OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 myCalendar[Calendar.YEAR] = year
                 myCalendar[Calendar.MONTH] = monthOfYear
                 myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
                 updateLabel(endDate)
             }
 
-        startDate.setOnClickListener { // TODO Auto-generated method stub
+        startDate.setOnClickListener {
             DatePickerDialog(
                 this@RoomActivity, sDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             ).show()
         }
-        endDate.setOnClickListener { // TODO Auto-generated method stub
+        endDate.setOnClickListener {
             DatePickerDialog(
                 this@RoomActivity, eDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
@@ -128,15 +134,15 @@ class RoomActivity : AppCompatActivity() {
 
         personNum.afterTextChanged {
             if (!isPersonValid(personNum)) {
-                personNum.error = "Chybný počet osob"
+                personNum.error = "Bad person count"
             }
         }
 
         startDate.afterTextChanged {
             if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
                 if (!isDatesValid(startDate.text.toString(), endDate.text.toString())) {
-                    startDate.error = "Chybně zadané datum"
-                    endDate.error = "Chybně zadané datum"
+                    startDate.error = "Wrong date"
+                    endDate.error = "Wrong date"
                     reserveButton.isEnabled = false
                 }
                 reserveButton.isEnabled = true
@@ -145,8 +151,8 @@ class RoomActivity : AppCompatActivity() {
         endDate.afterTextChanged {
             if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
                 if (!isDatesValid(startDate.text.toString(), endDate.text.toString())) {
-                    startDate.error = "Chybně zadané datum"
-                    endDate.error = "Chybně zadané datum"
+                    startDate.error = "Wrong date"
+                    endDate.error = "Wrong date"
                     reserveButton.isEnabled = false
                 }
                 reserveButton.isEnabled = true
@@ -191,13 +197,15 @@ class RoomActivity : AppCompatActivity() {
     fun callbackRequestResponse(response: JSONObject) {
         Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
     }
-    /**
-     * Extension function to simplify setting an afterTextChanged action to EditText components.
-     */
+
+    // Extension function to simplify setting an afterTextChanged action to EditText components.
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
-                afterTextChanged.invoke(editable.toString())
+                try {
+                    afterTextChanged.invoke(editable.toString())
+                }
+                catch (e: Exception){}
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}

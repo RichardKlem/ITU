@@ -31,34 +31,34 @@ class HotelActivity : AppCompatActivity() {
 
         when (hotelId) {
             1 -> {
-                val header = "Pokoje hotelu $hotelName"
+                val header = "Rooms of $hotelName"
                 binding.textHeader.text = header
                 binding.imageRoom1.setImageResource(R.drawable.hotel_1_room_1)
                 binding.imageRoom2.setImageResource(R.drawable.hotel_1_room_2)
                 binding.imageRoom3.setImageResource(R.drawable.hotel_1_room_3)
-                binding.textRoom1.text = "Pokoj 1"
-                binding.textRoom2.text = "Pokoj 2"
+                binding.textRoom1.text = "Single Room"
+                binding.textRoom2.text = "Double room"
                 binding.textRoom3.text = "Pokoj 3"
             }
             2 -> {
-                val header = "Pokoje hotelu $hotelName"
+                val header = "Rooms of $hotelName"
                 binding.textHeader.text = header
                 binding.imageRoom1.setImageResource(R.drawable.hotel_2_room_1)
                 binding.imageRoom2.setImageResource(R.drawable.hotel_2_room_2)
                 binding.imageRoom3.setImageResource(R.drawable.hotel_2_room_3)
-                binding.textRoom1.text = "Pokoj 1"
-                binding.textRoom2.text = "Pokoj 2"
+                binding.textRoom1.text = "Single Room"
+                binding.textRoom2.text = "Double room"
                 binding.textRoom3.text = "Pokoj 3"
             }
             3 -> {
-                val header = "Pokoje hotelu $hotelName"
+                val header = "Rooms of $hotelName"
                 binding.textHeader.text = header
                 binding.imageRoom1.setImageResource(R.drawable.hotel_3_room_1)
                 binding.imageRoom2.setImageResource(R.drawable.hotel_3_room_2)
                 binding.imageRoom3.setImageResource(R.drawable.hotel_3_room_3)
-                binding.textRoom1.text = "Pokoj 1"
-                binding.textRoom2.text = "Pokoj 2"
-                binding.textRoom3.text = "Pokoj 3"
+                binding.textRoom1.text = "Single Room"
+                binding.textRoom2.text = "Double room"
+                binding.textRoom3.text = "Deluxe Double Room"
             }
         }
         val hotelImage_1 = binding.imageRoom1

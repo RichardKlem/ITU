@@ -46,27 +46,27 @@ class BabySitterReserveActivity : AppCompatActivity() {
         val reserveButton = binding.button
 
         val sDate =
-            OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 myCalendar[Calendar.YEAR] = year
                 myCalendar[Calendar.MONTH] = monthOfYear
                 myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
                 updateLabel(startDate)
             }
         val eDate =
-            OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 myCalendar[Calendar.YEAR] = year
                 myCalendar[Calendar.MONTH] = monthOfYear
                 myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
                 updateLabel(endDate)
             }
 
-        startDate.setOnClickListener { // TODO Auto-generated method stub
+        startDate.setOnClickListener {
             DatePickerDialog(
                 this@BabySitterReserveActivity, sDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             ).show()
         }
-        endDate.setOnClickListener { // TODO Auto-generated method stub
+        endDate.setOnClickListener {
             DatePickerDialog(
                 this@BabySitterReserveActivity, eDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
@@ -77,8 +77,8 @@ class BabySitterReserveActivity : AppCompatActivity() {
         startDate.afterTextChanged {
             if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
                 if (!isDatesValid(startDate.text.toString(), endDate.text.toString())) {
-                    startDate.error = "Chybně zadané datum"
-                    endDate.error = "Chybně zadané datum"
+                    startDate.error = "Wrong date"
+                    endDate.error = "Wrong date"
                     reserveButton.isEnabled = false
                 }
                 reserveButton.isEnabled = true
@@ -87,22 +87,13 @@ class BabySitterReserveActivity : AppCompatActivity() {
         endDate.afterTextChanged {
             if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
                 if (!isDatesValid(startDate.text.toString(), endDate.text.toString())) {
-                    startDate.error = "Chybně zadané datum"
-                    endDate.error = "Chybně zadané datum"
+                    startDate.error = "Wrong date"
+                    endDate.error = "Wrong date"
                     reserveButton.isEnabled = false
                 }
                 reserveButton.isEnabled = true
             }
         }
-
-        /*val yourDate = Calendar.getInstance().timeInMillis
-        val millionSeconds = yourDate - TimeUnit.toMillis(2)
-        val out = TimeUnit.MILLISECONDS.toDays(millionSeconds).toString()
-        val myFormat = "YYYY-MM-DD"
-        val formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy h:mm:ss a")
-        val dateTime = LocalDateTime.parse(date, formatter)
-        val formatter2 = DateTimeFormatter.ofPattern("dd MMM yyyy")
-        println(dateTime.format(formatter2))*/
 
         val price = 1000
         val priceText = "$price Kč"
@@ -123,7 +114,6 @@ class BabySitterReserveActivity : AppCompatActivity() {
         val endDateDB: Date? = sdf.parse(endDateString)
         val diff: Long = endDateDB!!.time - startDateDB!!.time
         val hours = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS).toInt()
-        //(startDateDB.time < today) ||
         if ((today.after(startDateDB)) || (hours > 12)) {
             return false
         }

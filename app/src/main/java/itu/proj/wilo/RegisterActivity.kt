@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -116,7 +117,7 @@ class RegisterActivity : AppCompatActivity() {
             postData.put("email", email.text.toString())
             postData.put("password", password.text.toString())
 
-            val jsonArrayRequest = JsonObjectRequest(
+            val jsonObjectRequest = JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 postData,
@@ -129,7 +130,12 @@ class RegisterActivity : AppCompatActivity() {
                 ).show()
                 loading.visibility = View.GONE
             }
-            requestQueue.add(jsonArrayRequest)
+            // Set no retry policy, because bug in Volley is by default doubling requests
+            jsonObjectRequest.retryPolicy = DefaultRetryPolicy(
+                    0,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+            requestQueue.add(jsonObjectRequest)
             loading.visibility = View.VISIBLE
         }
     }
@@ -146,9 +152,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         loading.visibility = View.GONE
     }
-    /**
-     * Extension function to simplify setting an afterTextChanged action to EditText components.
-     */
+    // Extension function to simplify setting an afterTextChanged action to EditText components.
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {

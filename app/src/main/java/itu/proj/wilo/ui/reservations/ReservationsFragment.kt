@@ -1,20 +1,14 @@
 package itu.proj.wilo.ui.reservations
 
-
-import android.R.*
 import android.os.Bundle
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
@@ -69,9 +63,12 @@ class ReservationsFragment : Fragment() {
             null,
             onResponse(this)
         ) { throw Exception("User bookings information retrieving failed.") }
+        // Set no retry policy, because bug in Volley is by default doubling requests
+        jsonArrayRequest.retryPolicy = DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
         requestQueue.add(jsonArrayRequest)
-
-
 
         return root
     }
@@ -83,6 +80,7 @@ class ReservationsFragment : Fragment() {
     fun callbackRequestResponse(response: JSONArray) {
         val linView = binding.linearView
 
+        // Dynamic
         for (i in 0 until response.length()) {
             val row: JSONObject = response.getJSONObject(i)
             val cardView = this.layoutInflater.inflate(R.layout.reservation_template, null, false)

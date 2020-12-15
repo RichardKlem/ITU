@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Cookie: $globalCookie", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, R.string.welcome, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
 
@@ -45,19 +45,18 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        // Setting up drawer menu. IDs must correspond with IDs in XML navigation file,
+        // because of automatic 1:1 mapping.
         appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_home, R.id.nav_account, R.id.nav_settings, R.id.nav_reservations,R.id.nav_home,
                 R.id.nav_babysitting_search
         ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        //setNavigationViewListener()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu. This adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }

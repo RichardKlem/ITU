@@ -3,7 +3,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Wilo</string>
-    <string name="nav_header_subtitle">xklemr00@stud.fit.vutbr.cz</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -12,10 +11,7 @@
     <string name="menu_reservations">My reservations</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_support">Support</string>
-    <string name="hotel_klajdovka_description">Hotel Velká Klajdovka naleznete v poklidné lokalitě na zeleném předměstí Brna. Pohodlné ubytování je pro hosty připraveno v komfortně zařízených pokojích a apartmánech s neopakovatelným výhledem do kraje. K pořádání svateb a jiných firemních i rodinných akcí poslouží Velký salon s 55 místy, Obloukový salon s 20 místy a Malý salon pro 10 hostů. Zapůjčit lze i potřebnou audiovizuální techniku. K dispozici je i vlastní restaurace a stylová pivnice s příjemným posezením. Parkování vozů je řidičům umožněno zdarma přímo u objektu.</string>
-    <string name="hotel_velka_klajdovka_name">Hotel Velká Klajdovka</string>
-    <string name="hotel_continental_description">Hotel Continental s dlouholetou tradicí je situován v historicky unikátní stavbě. Kromě komfortního ubytování ve 214 příjemně zařízených pokojích čtyř kategorií s výhledem na historické centrum města nabízí hotel kvalitní a profesionální služby. Součástí hotelu je 6 klimatizovaných, technicky vybavených konferenčních sálů s kapacitou až 400 míst, luxusní klub s večerní živou klavírní hudbou či Restaurace à la carte a kavárna. Příjemný odpočinek a relaxaci nabízí hotelové wellness centrum se saunou a vířivkou. Parkování vozů je za poplatek řidičům umožněno před hotelem a v hotelových garážích.</string>
-    <string name="hotel_continental_name">Hotel Continental</string>
+
     <!-- Preference Titles -->
     <string name="lang_and_curr">Language and currency</string>
     <string name="log_out_title">Log out</string>

@@ -38,7 +38,7 @@ class HotelActivity : AppCompatActivity() {
                 binding.imageRoom3.setImageResource(R.drawable.hotel_1_room_3)
                 binding.textRoom1.text = "Single Room"
                 binding.textRoom2.text = "Double room"
-                binding.textRoom3.text = "Pokoj 3"
+                binding.textRoom3.text = "Deluxe Double Room"
             }
             2 -> {
                 val header = "Rooms of $hotelName"
@@ -48,7 +48,7 @@ class HotelActivity : AppCompatActivity() {
                 binding.imageRoom3.setImageResource(R.drawable.hotel_2_room_3)
                 binding.textRoom1.text = "Single Room"
                 binding.textRoom2.text = "Double room"
-                binding.textRoom3.text = "Pokoj 3"
+                binding.textRoom3.text = "Deluxe Double Room"
             }
             3 -> {
                 val header = "Rooms of $hotelName"

@@ -2,10 +2,10 @@ package itu.proj.wilo
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.app.TimePickerDialog
+import android.app.TimePickerDialog.OnTimeSetListener
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import itu.proj.wilo.databinding.ActivityBabysitterReserveBinding
@@ -21,8 +21,9 @@ class BabySitterReserveActivity : AppCompatActivity() {
     lateinit var binding: ActivityBabysitterReserveBinding
     lateinit var loading: ProgressBar
     private var cookie: String? = null
-    lateinit var startDate: EditText
-    lateinit var endDate: EditText
+    lateinit var date: EditText
+    lateinit var timeFrom: EditText
+    lateinit var timeTo: EditText
     lateinit var hoursSum: TextView
     private lateinit var myCalendar: Calendar
 
@@ -39,63 +40,89 @@ class BabySitterReserveActivity : AppCompatActivity() {
 
         myCalendar = Calendar.getInstance()
 
-        startDate = binding.textDateStart
-        endDate = binding.textDateEnd
+        date = binding.textDateStart
+        timeFrom = binding.textTimeStart
+        timeTo = binding.textTimeEnd
         hoursSum = binding.textHoursSum
         hoursSum.text = "0"
         val reserveButton = binding.button
 
         val sDate =
-            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                myCalendar[Calendar.YEAR] = year
-                myCalendar[Calendar.MONTH] = monthOfYear
-                myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-                updateLabel(startDate)
+                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    myCalendar[Calendar.YEAR] = year
+                    myCalendar[Calendar.MONTH] = monthOfYear
+                    myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+                    updateLabel(date)
+                }
+        val sTime =
+            OnTimeSetListener { view, hours, minutes ->
+                myCalendar[Calendar.HOUR] = hours
+                myCalendar[Calendar.MINUTE] = minutes
+                updateLabelTime(timeFrom)
             }
-        val eDate =
-            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                myCalendar[Calendar.YEAR] = year
-                myCalendar[Calendar.MONTH] = monthOfYear
-                myCalendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-                updateLabel(endDate)
+        val eTime =
+                OnTimeSetListener { view, hours, minutes ->
+                myCalendar[Calendar.HOUR] = hours
+                myCalendar[Calendar.MINUTE] = minutes
+                    updateLabelTime(timeTo)
             }
 
-        startDate.setOnClickListener {
+        date.setOnClickListener {
             DatePickerDialog(
                 this@BabySitterReserveActivity, sDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             ).show()
         }
-        endDate.setOnClickListener {
-            DatePickerDialog(
-                this@BabySitterReserveActivity, eDate, myCalendar[Calendar.YEAR], myCalendar[Calendar.MONTH],
-                myCalendar[Calendar.DAY_OF_MONTH]
+        timeFrom.setOnClickListener {
+            TimePickerDialog (
+                this@BabySitterReserveActivity, sTime, myCalendar[Calendar.HOUR], myCalendar[Calendar.MINUTE], true
+            ).show()
+        }
+        timeTo.setOnClickListener {
+            TimePickerDialog(
+                    this@BabySitterReserveActivity, eTime, myCalendar[Calendar.HOUR], myCalendar[Calendar.MINUTE], true
             ).show()
         }
 
 
-        startDate.afterTextChanged {
-            if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
-                if (!isDatesValid(startDate.text.toString(), endDate.text.toString())) {
-                    startDate.error = "Wrong date"
-                    endDate.error = "Wrong date"
+        date.afterTextChanged {
+            if (date.text.isNotEmpty() && date.text.isNotEmpty()) {
+                if (!isDatesValid(date.text.toString(),date.text.toString(), date.text.toString())) {
+                    date.error = "Wrong date"
+                    date.error = "Wrong date"
                     reserveButton.isEnabled = false
                 }
                 reserveButton.isEnabled = true
             }
         }
-        endDate.afterTextChanged {
-            if (startDate.text.isNotEmpty() && endDate.text.isNotEmpty()) {
-                if (!isDatesValid(startDate.text.toString(), endDate.text.toString())) {
-                    startDate.error = "Wrong date"
-                    endDate.error = "Wrong date"
+        timeFrom.afterTextChanged {
+            Toast.makeText(
+                    applicationContext,
+                    timeFrom.text.toString(),
+                    Toast.LENGTH_LONG
+            ).show()
+
+            if (timeFrom.text.isNotEmpty() && date.text.isNotEmpty()) {
+                if (!isDatesValid(date.text.toString(),timeFrom.text.toString(), timeTo.text.toString())) {
+                    timeFrom.error = "Wrong date"
+                    timeTo.error = "Wrong date"
+                    reserveButton.isEnabled = false
+                }
+                reserveButton.isEnabled = true
+            }
+        }
+        timeTo.afterTextChanged {
+            if (timeTo.text.isNotEmpty() && date.text.isNotEmpty()) {
+                if (!isDatesValid(date.text.toString(),timeFrom.text.toString(), timeTo.text.toString())) {
+                    timeFrom.error = "Wrong date"
+                    timeTo.error = "Wrong date"
                     reserveButton.isEnabled = false
                 }
                 reserveButton.isEnabled = true
             }
         }
 
-        val price = 1000
+        val price = 250
         val priceText = "$price Kč"
         binding.textPricePerHour.text = priceText
         val priceSumText = "${price * hoursSum.text.toString().toInt()} Kč"
@@ -106,19 +133,27 @@ class BabySitterReserveActivity : AppCompatActivity() {
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         date.setText(sdf.format(myCalendar.time))
     }
-    private fun isDatesValid(startDateString: String, endDateString: String): Boolean {
-        val myFormat = "yyyy-MM-dd"
+    private fun updateLabelTime(time: EditText) {
+        val myFormat = "hh:mm" //In which you need put here
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        time.setText(sdf.format(myCalendar.time))
+    }
+    private fun isDatesValid(dateString: String, startTimeString: String, endTimeString: String): Boolean {
+        val myFormat = "yyyy-MM-dd hh:mm"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         val today = Calendar.getInstance()
-        val startDateDB: Date? = sdf.parse(startDateString)
-        val endDateDB: Date? = sdf.parse(endDateString)
+
+        val stringTime = dateString + " " + startTimeString
+        val endTime = dateString + " " + endTimeString
+
+        val startDateDB: Date? = sdf.parse(stringTime)
+        val endDateDB: Date? = sdf.parse(endTime)
         val diff: Long = endDateDB!!.time - startDateDB!!.time
         val hours = TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS).toInt()
         if ((today.after(startDateDB)) || (hours > 12)) {
             return false
         }
-        startDate.error = null
-        endDate.error = null
+        date.error = null
         hoursSum.text = hours.toString()
         val finalPrice = "${binding.textPricePerHour.text.toString().toInt() * hours} Kč"
         binding.textPriceSum.text = finalPrice

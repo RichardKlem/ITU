@@ -23,7 +23,7 @@
         android:id="@+id/text_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Teta/strejda na hlídání"
+        android:text="Babysitter"
         android:textSize="22sp"
         android:textStyle="bold"
 
@@ -33,27 +33,27 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="228dp"
+        android:contentDescription="@string/room_picture"
         android:padding="10dp"
         android:src="@drawable/babysitter_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_header"
-        app:layout_constraintVertical_bias="0.021"
-        android:contentDescription="@string/room_picture"/>
+        app:layout_constraintVertical_bias="0.021" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20 let, studentka"
+        android:text="20 years, student"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TableLayout
         android:id="@+id/account_table"
@@ -73,7 +73,7 @@
 
             <TextView
                 android:id="@+id/row_price_per_night"
-                android:text="Cena za hodinu"
+                android:text="Price per hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -91,10 +91,9 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <TextView
                 android:id="@+id/row_date_start"
-                android:text="Začátek hlídání"
+                android:text="Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -109,38 +108,63 @@
                 android:ems="10"
                 android:layout_marginStart="20dp"
                 android:inputType="date"
-                android:autofillHints="Začátek hlídání"
+                android:autofillHints="Date"
                 android:clickable="true"
                 android:focusable="false"
                 android:editable="false"/>
-
-
-
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/row_date_end"
-                android:text="Konec hlídání"
+                android:id="@+id/row_time_start"
+                android:text="Time from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <EditText
-                android:id="@+id/text_date_end"
+                android:id="@+id/text_time_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:ems="10"
                 android:layout_marginStart="20dp"
-                android:autofillHints="Konec hlídání"
+                android:autofillHints="Time from"
                 android:clickable="true"
                 android:focusable="false"
                 android:editable="false"
-                android:inputType="date" />
+                android:inputType="time" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/row_time_end"
+                android:text="Time to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/text_time_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:ems="10"
+                android:layout_marginStart="20dp"
+                android:inputType="time"
+                android:autofillHints="Time to"
+                android:clickable="true"
+                android:focusable="false"
+                android:editable="false"/>
+
         </TableRow>
 
         <TableRow
@@ -149,7 +173,7 @@
 
             <TextView
                 android:id="@+id/row_hours_sum"
-                android:text="Celkem hodin"
+                android:text="Ordered hours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -169,7 +193,7 @@
 
             <TextView
                 android:id="@+id/row_price_sum"
-                android:text="Cena celkem"
+                android:text="Price sum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -191,7 +215,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Objednat hlídání"
+        android:text="Order babysitting"
         android:enabled="false"
         android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"

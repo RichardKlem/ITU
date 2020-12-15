@@ -73,7 +73,7 @@
 
             <TextView
                 android:id="@+id/row_price_per_night"
-                android:text="Cena za noc"
+                android:text="Price per hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/row_persons_sum"
-                android:text="Počet osob"
+                android:text="Guests count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:inputType="number"
-                android:autofillHints="Počet ubytovaných osob"
+                android:autofillHints="Guests count"
                 android:textSize="20sp" />
         </TableRow>
 
@@ -117,7 +117,7 @@
 
             <TextView
                 android:id="@+id/row_date_start"
-                android:text="Začátek pobytu"
+                android:text="Date from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -132,7 +132,7 @@
                 android:ems="10"
                 android:layout_marginStart="20dp"
                 android:inputType="date"
-                android:autofillHints="Datum Vašeho příjezdu"
+                android:autofillHints="Check-in"
                 android:clickable="true"
                 android:focusable="false"
                 android:editable="false"/>
@@ -146,7 +146,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/row_date_end"
-                android:text="Konec pobytu"
+                android:text="Date to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -159,7 +159,7 @@
                 android:textSize="20sp"
                 android:ems="10"
                 android:layout_marginStart="20dp"
-                android:autofillHints="Datum Vašeho odjezdu"
+                android:autofillHints="Check-out"
                 android:clickable="true"
                 android:focusable="false"
                 android:editable="false"
@@ -172,7 +172,7 @@
 
             <TextView
                 android:id="@+id/row_days_sum"
-                android:text="Celkem nocí"
+                android:text="Nights"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -192,7 +192,7 @@
 
             <TextView
                 android:id="@+id/row_price_sum"
-                android:text="Cena celkem"
+                android:text="Price sum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="textStart"
@@ -214,9 +214,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Rezervovat"
+        android:text="Book"
         android:enabled="false"
-        android:gravity="start"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
